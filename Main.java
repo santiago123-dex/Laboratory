@@ -3,12 +3,15 @@ import java.util.Scanner;
 
 import model.EmpleadoEventual;
 import model.EmpleadoPlantilla;
+import model.Medico;
 import model.Paciente;
 
 public class Main {
     private static ArrayList<Paciente> paciente = new ArrayList<>();
     private static ArrayList<EmpleadoPlantilla> empleadoPlantilla = new ArrayList<>();
     private static ArrayList<EmpleadoEventual> empleadoEventuals = new ArrayList<>();
+    private static ArrayList<Medico> medicos = new ArrayList<>();
+
     static Scanner scan = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -23,6 +26,10 @@ public class Main {
             System.out.println("2. Ingresar datos para registrar al paciente");
             System.out.println("3. Imprimir los datos del empleado de plantilla");
             System.out.println("4. Ingresar datos para registrar al Empleado de plantilla");
+            System.out.println("5. Imprimir los datos del empleado eventual");
+            System.out.println("6. Ingresar datos para registrar al empleado eventual");
+            System.out.println("7. Imprimir los datos del medico");
+            System.out.println("8. Ingresar datos para registrar al medico");
 
             System.out.println("--------------------------------");
             opcion = scan.nextInt();
@@ -48,11 +55,17 @@ public class Main {
                 case 6:
                     registrarEmpleadoEventual();
                     break;
+                case 7:
+                    imprimirDatosMedico();
+                    break;
+                case 8:
+                    registrarMedico();
+                    break;
                 default:
                     break;
             }
 
-        } while (opcion != 7);
+        } while (opcion != 9);
     }
 
     /* Metodos para los pacientes */
@@ -223,5 +236,74 @@ public class Main {
         EmpleadoEventual nEmpleadoEventual = new EmpleadoEventual(dni, nombre, apellido, fechaDeNacimiento, direccion, ciudadProcedencia, codigoEmpleado, horasExtras, fechaIngreso, area, cargo, honorariosHora, fechaContrato);
         empleadoEventuals.add(nEmpleadoEventual);
         System.out.println("Empleado eventual registrado correctamente");
+    }
+
+    /*  metodos para el medico */
+
+     public static void imprimirDatosMedico() {
+        for (int i = 0; i < medicos.size(); i++) {
+            /* Para saber el numero del empleado */
+            System.out.println("\n--- Medico " + (i + 1) + " ---");
+            medicos.get(i).imprimirDatosMedico();
+            System.out.println("--------------------------------");
+        }
+    }
+
+    public static void registrarMedico() {
+
+         System.out.println("Ingrese su DNI");
+        Long dni = scan.nextLong();
+        scan.nextLine();
+
+        System.out.println("Ingrese su nombre");
+        String nombre = scan.nextLine();
+
+        System.out.println("Ingrese su apellido");
+        String apellido = scan.nextLine();
+
+        System.out.println("Ingrese su fecha de nacimiento");
+        String fechaDeNacimiento = scan.nextLine();
+
+        System.out.println("Ingrese su direccion");
+        String direccion = scan.nextLine();
+
+        System.out.println("Ingrese su ciudad de procedencia");
+        String ciudadProcedencia = scan.nextLine();
+
+        System.out.println("Ingrese el codigo del empleado");
+        Long codigoEmpleado = scan.nextLong();
+        scan.nextLine();
+
+        System.out.println("Ingrese las horas extras del empleado");
+        Long horasExtras = scan.nextLong();
+        scan.nextLine();
+
+        System.out.println("Ingrese la fecha de ingreso del empleado (dd/mm/aaaa)");
+        String fechaIngreso = scan.nextLine();
+
+        System.out.println("Ingrese el area del empleado");
+        String area = scan.nextLine();
+
+        System.out.println("Ingrese el cargo del empleado");
+        String cargo = scan.nextLine();
+
+        System.out.println("Ingrese el salario mensual del empleado");
+        Double salarioMensual = scan.nextDouble();
+        scan.nextLine();
+
+        System.out.println("Ingrese el porcentaje de horas extras");
+        Double porcentajeHorasExtras = scan.nextDouble();
+        scan.nextLine();
+
+        System.out.println("Ingrese la especialidad del medico");
+        String especialidad = scan.nextLine();
+
+        System.out.println("Ingrese el numero de consultorio");
+        int numeroConsultorio = scan.nextInt();
+        scan.nextLine();
+
+        Medico nMedico = new Medico(dni, nombre, apellido, fechaDeNacimiento, direccion, ciudadProcedencia, codigoEmpleado, horasExtras, fechaIngreso, area, cargo, salarioMensual, porcentajeHorasExtras, especialidad, numeroConsultorio);
+        medicos.add(nMedico);
+        System.out.println("Medico registrado correctamente");
     }
 }
